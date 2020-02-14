@@ -20,6 +20,13 @@ function commit -d "Commit helper"
   set options $options (fish_opt --short=s --long=security)
   argparse $options -- $argv
 
+  set -l gits (git diff --cached --exit-code)
+  if test -z "$gits"
+    echo "No staged commits"
+
+    return 0
+  end
+
   if test -n "$_flag_added"; or test -n "$_flag_a"
     # replace the current command buffer with this string:
     commandline -r "git commit -m \"Added: \""
