@@ -8,6 +8,21 @@ function commit -d "Commit helper"
   # Determine the location to use.
   if test (count $argv) -eq 0
     commit.help
+
+    return 0
+  end
+
+  set -l gitt (git rev-parse --is-inside-work-tree 2>/dev/null)
+  if test "$gitt" != "true"
+    echo "Not a git repository"
+
+    return 0
+  end
+
+  set -l gits (git diff --cached --exit-code)
+  if test -z "$gits"
+    echo "No staged commits"
+
     return 0
   end
 
@@ -19,13 +34,6 @@ function commit -d "Commit helper"
   set options $options (fish_opt --short=f --long=fixed)
   set options $options (fish_opt --short=s --long=security)
   argparse $options -- $argv
-
-  set -l gits (git diff --cached --exit-code)
-  if test -z "$gits"
-    echo "No staged commits"
-
-    return 0
-  end
 
   if test -n "$_flag_added"; or test -n "$_flag_a"
     # replace the current command buffer with this string:
