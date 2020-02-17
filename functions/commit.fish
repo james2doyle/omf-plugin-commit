@@ -1,11 +1,4 @@
 function commit -d "Commit helper"
-  # Display help message.
-  if begin; contains -- -h $argv; or contains -- --help $argv; end
-    commit.help
-    return 0
-  end
-
-  # Determine the location to use.
   if test (count $argv) -eq 0
     commit.help
 
@@ -34,6 +27,13 @@ function commit -d "Commit helper"
   set options $options (fish_opt --short=f --long=fixed)
   set options $options (fish_opt --short=s --long=security)
   argparse $options -- $argv
+
+  # Display help message.
+  if test -n "$_flag_help"; or test -n "$_flag_h"
+    commit.help
+
+    return 0
+  end
 
   if test -n "$_flag_added"; or test -n "$_flag_a"
     # replace the current command buffer with this string:
