@@ -1,9 +1,7 @@
 function commit.help
   echo "Commit helper for keepachangelog.com
-Usage: commit [-h|--help][-a|--added][-c|--changed][-d|--deprecated][-r|--removed][-f|--fixed][-s|--security]
-  Displays the current conditions and a 5-day forecast. If $query is given,
-  weather conditions will be for the the best city that matches the query. If
-  $query is not given, the current location will be used based on IP address.
+Usage: commit [-h|--help] [-a|--added] [-c|--changed] [-d|--deprecated] [-r|--removed] [-f|--fixed] [-s|--security]
+  Helper to prefix commit messages with the verbs from keepachangelog.com
 Options:
   -h, --help           Display this help message and exit.
   -a, --added          Make a commit for \"Added\".
