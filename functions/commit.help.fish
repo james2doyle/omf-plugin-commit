@@ -1,7 +1,9 @@
 function commit.help
   echo "Commit helper for keepachangelog.com
+
 Usage: commit [-h|--help] [-a|--added] [-c|--changed] [-d|--deprecated] [-r|--removed] [-f|--fixed] [-s|--security]
   Helper to prefix commit messages with the verbs from keepachangelog.com
+
 Options:
   -h, --help           Display this help message and exit.
   -a, --added          Make a commit for \"Added\".

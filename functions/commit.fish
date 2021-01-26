@@ -1,6 +1,16 @@
 function commit -d "Commit helper"
   if test (count $argv) -eq 0
-    commit.help
+    if not type -q fzf
+      echo "fzf command cannot be found"
+
+      return 1
+    end
+
+    set selection (commit.list | fzf --tac +s -e --header='[fuzzy:commit]' | perl -lne 'print $1 if /(--\w+)/i')
+    if [ $selection ]
+      commandline -r "commit $selection"
+      commandline -f execute
+    end
 
     return 0
   end
